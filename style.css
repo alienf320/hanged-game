@@ -1,0 +1,125 @@
+html {
+	scroll-behavior: smooth;
+	font-family: 'Nunito', sans-serif;
+	background: #F3F5FC;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+} 
+
+.container {
+	margin: 0;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;	
+	justify-content: center;
+}
+
+.titulo {
+	font-family: "Supermercado One", cursive;
+	font-size: 7rem;
+  padding: 15px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  top: -80px;
+	color: #FFFFFF;
+	text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #3467FF 0px 0px 20px, #3467FF 0px 0px 30px, #3467FF 0px 0px 40px, #3467FF 0px 0px 50px, #3467FF 0px 0px 75px;
+}
+
+.btn {
+	border-radius: 24px;
+	
+	font-family: 'Nunito', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	line-height: 22px;
+	padding: 24px;
+	font-weight: 800;
+	
+	width: 280px;
+	height: 67px;
+	margin: 30px;
+}
+
+.letras {
+	color: #F3F5FC;
+	position: absolute;
+	padding-left: 300px;
+	padding-bottom: 100px;
+}
+
+figure {
+	display: inline-block;
+	width: 45px;
+	border-bottom: 3px solid black;
+	margin: 5px;
+	padding: 3px;
+	font-size: 3rem;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.errores {
+	position: absolute;
+	padding-left: 300px;
+	padding-top: 80px;
+}
+
+.errores span {
+	font-size: 2rem;
+	margin: 5px;
+	color: red;
+	text-transform: uppercase;
+}
+
+.mostrarLetra {
+	color: black;
+}
+
+.btnA {
+	background: #0A3871;
+	color: #FFFFFF;
+}
+
+.btnB {
+	color: #0A3871;
+	border: 1px solid #0A3871;
+}
+
+.botonera {
+	display: flex;
+}
+
+.text-input {
+  border-radius: 0.5em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: block;
+  padding: 0.5em;
+  width: 30%;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.remove-scrolling { 
+  height: 100%; 
+  overflow: hidden; 
+} 
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	background-color: #495057;
+	color: white;
+}
+
+.footer div {
+	margin: 10px;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Ahorcado</title>
+    <link rel="stylesheet" href="style.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet"> 
+		<link href="https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap" rel="stylesheet"> 
+
+		<script
+			  src="https://code.jquery.com/jquery-3.6.0.js"
+			  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+			  crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.10/sweetalert2.all.js"></script>
+		<script
+			  src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"
+			  integrity="sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k="
+			  crossorigin="anonymous"></script>
+				
+		<script type="text/javascript" src="canvas.js"></script>
+    <script type="text/javascript" src="ahorcado.js"></script>
+  </head>
+	
+  <body>
+	
+    <div class="container" id="page1">
+      <h1 class="titulo">AHORCADO</h1>
+      <button class="btn btnA" id="iniciar-juego">INICIAR JUEGO</button>
+			<button class="btn btnB" id="nueva-palabra">AGREGAR PALABRA</button> 
+			<div class="footer">
+			<div> Creado por Cristian M. Chavez </div>
+			<div> Mendoza, Argentina </div>
+		</div>
+    </div>
+		
+    <div class="container" id="page2">
+			<h1>Ingrese una palabra</h1>
+      <input class="text-input" type="text" id="input-nueva-palabra" placeholder="Escriba una nueva palabra">
+			<button class="btn btnA" id="add-word">AGREGAR</button>
+			<button class="btn btnB" id="cancel-add-word">CANCEL</button>
+    </div class="container">
+		
+    <div class="container" id="page3">
+      <canvas id="ahorcado" height="800px" width="1200px"></canvas>
+			<div class="letras">
+			</div>
+			<div class="errores">
+			</div>
+			<div class="botonera">
+				<button class="btn btnA" id="new-game">NUEVO JUEGO</button>
+				<button class="btn btnB" id="surrender">RENDIRSE</button>
+			</div>
+    </div>
+			
+		
+  </body>
+	
+	
+</html>
