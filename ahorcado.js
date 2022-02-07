@@ -1,6 +1,8 @@
 var palabrasSecretas = ["papa", "melon", "sandia", "auto", "pelicula"];
 var palabraElegida = "";
 var errores = 0;
+var juegoTerminado = false;
+var letrasErroneas = [];
 
 window.onload = function() {
 	$('#iniciar-juego').click(function() {
@@ -36,10 +38,12 @@ window.onload = function() {
 }
 
 function setup() {
+	juegoTerminado = false;
+	letrasErroneas = [];
 	limpiarTablero();
 	palabraElegida = escogerPalabra();
 	deletrear(palabraElegida);
-	document.addEventListener('keydown', teclaPresionada);
+	document.addEventListener('keydown', teclaPresionada);	
 }
 
 function disableScroll() { 
@@ -70,7 +74,7 @@ function deletrear(p) {
 }
 
 function teclaPresionada(e) {
-	if(/[a-z]/.test(e.key) && e.key.length == 1) {
+	if(/[a-z]/.test(e.key) && e.key.length == 1 && !juegoTerminado) {
 		descubrirLetras(e.key);
 		comprobarVictoria(e.key);
 	}
@@ -89,15 +93,23 @@ function comprobarVictoria(letra) {
 	if(palabraElegida.length == 0) { terminarJuego() };
 }
 
+
+// --- Arreglar problema con shake ---
 function letraErronea(letra) {
-	$("canvas").effect("shake");
-	$(".errores").append("<span>" + letra + "</span>");
-	errores += 1;
-	dibujarCuerpo(errores);
-	if(errores >= 6) { terminarJuego() };
+	if(!letrasErroneas.includes(letra)) {
+		letrasErroneas.push(letra);
+		document.removeEventListener('keydown', teclaPresionada);
+		$("canvas").effect("shake");
+		window.setInterval(function() {document.addEventListener('keydown', teclaPresionada);}, 1000);
+		$(".errores").append("<span>" + letra + "</span>");
+		errores += 1;
+		dibujarCuerpo(errores);
+		if(errores >= 6) { terminarJuego() };
+	}
 }
 
 function terminarJuego() {
+	juegoTerminado = true;
 	document.removeEventListener('keydown', teclaPresionada);
 	if(errores >= 6) {
 		Swal.fire(

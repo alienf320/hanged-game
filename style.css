@@ -92,6 +92,7 @@ figure {
 
 .botonera {
 	display: flex;
+	margin-bottom: 60px;
 }
 
 .text-input {
