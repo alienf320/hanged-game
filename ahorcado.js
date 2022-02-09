@@ -9,6 +9,7 @@ window.onload = function() {
 		enableScroll();
 		window.location = "#page3";
 		setup();
+		document.addEventListener('keydown', teclaPresionada);	
 	});
 	$('#nueva-palabra').click(function() {
 		enableScroll();
@@ -20,6 +21,7 @@ window.onload = function() {
 	});
 	$('#new-game').click(function() {
 		setup();
+		document.addEventListener('keydown', teclaPresionada);	
 	});
 	$('#surrender').click(function() {
 		rendirse();
@@ -43,11 +45,10 @@ function setup() {
 	limpiarTablero();
 	palabraElegida = escogerPalabra();
 	deletrear(palabraElegida);
-	document.addEventListener('keydown', teclaPresionada);	
 }
 
 function disableScroll() { 
-  document.body.classList.add("remove-scrolling"); 
+  //document.body.classList.add("remove-scrolling"); 
 } 
 
 function enableScroll() { 
