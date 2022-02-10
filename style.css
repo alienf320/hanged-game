@@ -105,7 +105,12 @@ figure {
   height: 50px;
   margin-left: auto;
   margin-right: auto;
-}
+}	
+
+#input-letras {
+		display: none;
+	}
+
 
 .remove-scrolling { 
   height: 100%; 
@@ -139,31 +144,30 @@ figure {
 	
 	.btn {
 		border-radius: 14px;
-	
 		
-		font-size: 12px;
-		
-		line-height: 16px;
-		padding: 14px;
+		font-size: 14px;
+		line-height: 14px;
+		padding: 10px;
 		font-weight: 800;
 		
 		width: 180px;
-		height: 47px;
-		margin: 10px;
+		height: 40px;
+		margin: 5px;
 	}
 	
 	.letras {
 		min-height: 35px;
-		
+		height: auto;
 	}
 
 	figure {
 		display: inline-block;
-		/*width: 25px;*/
+		width: 25px;
 		border-bottom: 3px solid black;
 		margin: 1px;
 		padding: 0px;
-		font-size: 2rem;
+		font-size: 1.5rem;
+		
 	}
 
 	.errores {
@@ -172,6 +176,24 @@ figure {
 
 	.errores span {
 		font-size: 1.5rem;
+	}
+	
+	.botonera {
+		margin-bottom: 10px;
+	}
+
+	.text-input {
+		border-radius: 0.5em;
+		border: 3px solid rgba(100, 100, 0);
+		display: block;
+		padding: 0;
+		width: 20%;
+		height: 30px;
+		text-align: center;
+	}
+	
+	#input-letras {
+		display: block;
 	}
 	
 	.footer {

@@ -1,26 +1,30 @@
-var x = -window.innerWidth/5;
-var y = 220;
+var x = window.innerWidth < 900 ? -window.innerWidth/5 : -400 ;
+var y = 240;
 
 function cargarCanvas() {
 	var c = document.getElementById("ahorcado");
   var ctx = c.getContext("2d");
   // Event handler to resize the canvas when the document view is changed
   window.addEventListener('resize', resizeCanvas, false);
+  resizeCanvas();
+}
 
-  function resizeCanvas() {
-    //c.width = window.innerWidth;
+function resizeCanvas() {
+    var c = document.getElementById("ahorcado");
+		var ctx = c.getContext("2d");
 		c.width = window.innerWidth;
-    c.height = window.innerHeight*0.6;
+    c.height = window.innerHeight*0.5;
 
     // Redraw everything after resizing the window
     drawStuff(); 
   }
-  resizeCanvas();
-}
 
 function drawStuff() {
 	var c = document.getElementById("ahorcado");
   var ctx = c.getContext("2d");
+	var scale = window.innerWidth/500 >= 1 ? 0.9: window.innerWidth/500;
+	x = window.innerWidth < 900 ? -window.innerWidth/3 : -400 ;
+	ctx.scale(scale,scale);
 		ctx.lineWidth = 5;
 		ctx.beginPath();
 		ctx.moveTo(0-x, 600-y);

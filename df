@@ -1,0 +1,201 @@
+warning: LF will be replaced by CRLF in index.html.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in style.css.
+The file will have its original line endings in your working directory
+[1mdiff --git a/ahorcado.js b/ahorcado.js[m
+[1mindex 4622bd3..c21ac0a 100644[m
+[1m--- a/ahorcado.js[m
+[1m+++ b/ahorcado.js[m
+[36m@@ -35,25 +35,30 @@[m [mwindow.onload = function() {[m
+ 		window.location = "#page1";[m
+ 	});[m
+ 	[m
+[31m-	cargarCanvas();[m
+[31m-	disableScroll();[m
+[32m+[m	[32m$('#input-letras').on('input', function() {[m
+[32m+[m		[32mconsole.log("input");[m
+[32m+[m[32m    $("#input-letras").val("");[m
+[32m+[m		[32m}).trigger('input');[m
+[32m+[m	[32mresizeCanvas();[m
+[32m+[m	[32m//disableScroll();[m
+ }[m
+ [m
+ function setup() {[m
+ 	juegoTerminado = false;[m
+ 	letrasErroneas = [];[m
+ 	limpiarTablero();[m
+[32m+[m	[32mcargarCanvas();[m
+ 	palabraElegida = escogerPalabra();[m
+ 	deletrear(palabraElegida);[m
+ }[m
+ [m
+ function disableScroll() { [m
+[31m-  //document.body.classList.add("remove-scrolling"); [m
+[32m+[m[41m  [m		[32mdocument.body.classList.add("remove-scrolling");[m
+ } [m
+ [m
+ function enableScroll() { [m
+   document.body.classList.remove("remove-scrolling"); [m
+[31m-	window.setInterval(disableScroll(), 500);[m
+[32m+[m	[32msetInterval(function() {document.body.classList.add("remove-scrolling")}, 1000);[m
+ }[m
+ [m
+ function limpiarTablero() {[m
+[36m@@ -75,8 +80,11 @@[m [mfunction deletrear(p) {[m
+ }[m
+ [m
+ function teclaPresionada(e) {[m
+[32m+[m	[32m//document.getElementById("input-letras").reset();[m
+[32m+[m	[32m//$("input-letras")[0].reset();[m
+ 	if(/[a-z]/.test(e.key) && e.key.length == 1 && !juegoTerminado) {[m
+ 		descubrirLetras(e.key);[m
+[32m+[m[41m		[m
+ 		comprobarVictoria(e.key);[m
+ 	}[m
+ }[m
+[36m@@ -84,6 +92,7 @@[m [mfunction teclaPresionada(e) {[m
+ function descubrirLetras(letra) {[m
+ 	let arrLetras = $("figure");[m
+ 	let figuras = arrLetras.filter(":contains(" + letra + ")");[m
+[32m+[m[41m	[m
+ 	if(figuras.length == 0) {letraErronea(letra);}[m
+ 	console.log(figuras);[m
+ 	figuras.addClass("mostrarLetra");[m
+[1mdiff --git a/canvas.js b/canvas.js[m
+[1mindex a60c206..27d8aa2 100644[m
+[1m--- a/canvas.js[m
+[1m+++ b/canvas.js[m
+[36m@@ -1,26 +1,30 @@[m
+[31m-var x = -window.innerWidth/5;[m
+[31m-var y = 220;[m
+[32m+[m[32mvar x = window.innerWidth < 900 ? -window.innerWidth/5 : -400 ;[m
+[32m+[m[32mvar y = 240;[m
+ [m
+ function cargarCanvas() {[m
+ 	var c = document.getElementById("ahorcado");[m
+   var ctx = c.getContext("2d");[m
+   // Event handler to resize the canvas when the document view is changed[m
+   window.addEventListener('resize', resizeCanvas, false);[m
+[32m+[m[32m  resizeCanvas();[m
+[32m+[m[32m}[m
+ [m
+[31m-  function resizeCanvas() {[m
+[31m-    //c.width = window.innerWidth;[m
+[32m+[m[32mfunction resizeCanvas() {[m
+[32m+[m[32m    var c = document.getElementById("ahorcado");[m
+[32m+[m		[32mvar ctx = c.getContext("2d");[m
+ 		c.width = window.innerWidth;[m
+[31m-    c.height = window.innerHeight*0.6;[m
+[32m+[m[32m    c.height = window.innerHeight*0.5;[m
+ [m
+     // Redraw everything after resizing the window[m
+     drawStuff(); [m
+   }[m
+[31m-  resizeCanvas();[m
+[31m-}[m
+ [m
+ function drawStuff() {[m
+ 	var c = document.getElementById("ahorcado");[m
+   var ctx = c.getContext("2d");[m
+[32m+[m	[32mvar scale = window.innerWidth/500 >= 1 ? 0.9: window.innerWidth/500;[m
+[32m+[m	[32mx = window.innerWidth < 900 ? -window.innerWidth/3 : -400 ;[m
+[32m+[m	[32mctx.scale(scale,scale);[m
+ 		ctx.lineWidth = 5;[m
+ 		ctx.beginPath();[m
+ 		ctx.moveTo(0-x, 600-y);[m
+[1mdiff --git a/index.html b/index.html[m
+[1mindex a3d3544..1b5ee88 100644[m
+[1m--- a/index.html[m
+[1m+++ b/index.html[m
+[36m@@ -51,6 +51,7 @@[m
+ 			<div class="errores">[m
+ 			</div>[m
+ 			<div class="botonera">[m
+[32m+[m				[32m<input class="text-input" id="input-letras" maxlength="1"/>[m
+ 				<button class="btn btnA" id="new-game">NUEVO JUEGO</button>[m
+ 				<button class="btn btnB" id="surrender">RENDIRSE</button>[m
+ 			</div>[m
+[1mdiff --git a/style.css b/style.css[m
+[1mindex d6fc1a4..e871778 100644[m
+[1m--- a/style.css[m
+[1m+++ b/style.css[m
+[36m@@ -105,7 +105,12 @@[m [mfigure {[m
+   height: 50px;[m
+   margin-left: auto;[m
+   margin-right: auto;[m
+[31m-}[m
+[32m+[m[32m}[m[41m	[m
+[32m+[m
+[32m+[m[32m#input-letras {[m
+[32m+[m		[32mdisplay: none;[m
+[32m+[m	[32m}[m
+[32m+[m
+ [m
+ .remove-scrolling { [m
+   height: 100%; [m
+[36m@@ -139,31 +144,30 @@[m [mfigure {[m
+ 	[m
+ 	.btn {[m
+ 		border-radius: 14px;[m
+[31m-	[m
+ 		[m
+[31m-		font-size: 12px;[m
+[31m-		[m
+[31m-		line-height: 16px;[m
+[31m-		padding: 14px;[m
+[32m+[m		[32mfont-size: 14px;[m
+[32m+[m		[32mline-height: 14px;[m
+[32m+[m		[32mpadding: 10px;[m
+ 		font-weight: 800;[m
+ 		[m
+ 		width: 180px;[m
+[31m-		height: 47px;[m
+[31m-		margin: 10px;[m
+[32m+[m		[32mheight: 40px;[m
+[32m+[m		[32mmargin: 5px;[m
+ 	}[m
+ 	[m
+ 	.letras {[m
+ 		min-height: 35px;[m
+[31m-		[m
+[32m+[m		[32mheight: auto;[m
+ 	}[m
+ [m
+ 	figure {[m
+ 		display: inline-block;[m
+[31m-		/*width: 25px;*/[m
+[32m+[m		[32mwidth: 25px;[m
+ 		border-bottom: 3px solid black;[m
+ 		margin: 1px;[m
+ 		padding: 0px;[m
+[31m-		font-size: 2rem;[m
+[32m+[m		[32mfont-size: 1.5rem;[m
+[32m+[m[41m		[m
+ 	}[m
+ [m
+ 	.errores {[m
+[36m@@ -174,6 +178,24 @@[m [mfigure {[m
+ 		font-size: 1.5rem;[m
+ 	}[m
+ 	[m
+[32m+[m	[32m.botonera {[m
+[32m+[m		[32mmargin-bottom: 10px;[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m	[32m.text-input {[m
+[32m+[m		[32mborder-radius: 0.5em;[m
+[32m+[m		[32mborder: 3px solid rgba(100, 100, 0);[m
+[32m+[m		[32mdisplay: block;[m
+[32m+[m		[32mpadding: 0;[m
+[32m+[m		[32mwidth: 20%;[m
+[32m+[m		[32mheight: 30px;[m
+[32m+[m		[32mtext-align: center;[m
+[32m+[m	[32m}[m
+[32m+[m[41m	[m
+[32m+[m	[32m#input-letras {[m
+[32m+[m		[32mdisplay: block;[m
+[32m+[m	[32m}[m
+[32m+[m[41m	[m
+ 	.footer {[m
+ 		display: none;[m
+ 	}[m

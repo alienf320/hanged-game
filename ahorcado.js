@@ -35,25 +35,30 @@ window.onload = function() {
 		window.location = "#page1";
 	});
 	
-	cargarCanvas();
-	disableScroll();
+	$('#input-letras').on('input', function() {
+		console.log("input");
+    $("#input-letras").val("");
+		}).trigger('input');
+	resizeCanvas();
+	//disableScroll();
 }
 
 function setup() {
 	juegoTerminado = false;
 	letrasErroneas = [];
 	limpiarTablero();
+	cargarCanvas();
 	palabraElegida = escogerPalabra();
 	deletrear(palabraElegida);
 }
 
 function disableScroll() { 
-  //document.body.classList.add("remove-scrolling"); 
+  		document.body.classList.add("remove-scrolling");
 } 
 
 function enableScroll() { 
   document.body.classList.remove("remove-scrolling"); 
-	window.setInterval(disableScroll(), 500);
+	setInterval(function() {document.body.classList.add("remove-scrolling")}, 1000);
 }
 
 function limpiarTablero() {
@@ -75,8 +80,11 @@ function deletrear(p) {
 }
 
 function teclaPresionada(e) {
+	//document.getElementById("input-letras").reset();
+	//$("input-letras")[0].reset();
 	if(/[a-z]/.test(e.key) && e.key.length == 1 && !juegoTerminado) {
 		descubrirLetras(e.key);
+		
 		comprobarVictoria(e.key);
 	}
 }
@@ -84,6 +92,7 @@ function teclaPresionada(e) {
 function descubrirLetras(letra) {
 	let arrLetras = $("figure");
 	let figuras = arrLetras.filter(":contains(" + letra + ")");
+	
 	if(figuras.length == 0) {letraErronea(letra);}
 	console.log(figuras);
 	figuras.addClass("mostrarLetra");
